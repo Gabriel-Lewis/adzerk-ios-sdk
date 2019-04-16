@@ -12,6 +12,6 @@ import Foundation
     Returns tracking URLs for any requested custom events.
 */
 public struct ADZPlacementEvent : Codable {
-    let id: Int
+    public let id: Int
     public let url: String
 }
