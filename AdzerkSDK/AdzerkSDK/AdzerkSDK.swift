@@ -569,20 +569,20 @@ public typealias ADZUserDBUserResponseCallback = (ADZUser?, Error?) -> ()
     
     private func buildPlacementResponse(_ data: Data) -> ADZPlacementResponse? {
         do {
-            let responseDictionary = try JSONSerialization.jsonObject(with: data, options: []) as! [String: AnyObject]
-            saveUserKey(responseDictionary)
-            return ADZPlacementResponse(dictionary: responseDictionary)
+            
+            let decoder = JSONDecoder()
+            let response = try decoder.decode(ADZPlacementResponse.self, from: data)
+            saveUserKey(response)
+            return response
         } catch {
             logger.error("couldn't parse response as JSON")
             return nil
         }
     }
     
-    private func saveUserKey(_ response: [String: AnyObject]) {
-        if let userSection = response["user"] as? [String: AnyObject] {
-            if let userKey = userSection["key"] as? String {
-                keyStore.saveUserKey(userKey)
-            }
+    private func saveUserKey(_ response: ADZPlacementResponse) {
+        if let key = response.user?.key {
+             keyStore.saveUserKey(key)
         }
     }
 }

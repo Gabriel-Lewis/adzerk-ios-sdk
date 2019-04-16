@@ -15,33 +15,42 @@ import Foundation
     This would be represented as two contents, one with the type `css` and one 
     with the type `html`.
 */
-public class ADZPlacementContent : NSObject {
+public struct ADZPlacementContent : Codable {
     /** 
         Indicates the type of content.
         Examples: `css`, `html`, `js`, `js-external`, or `raw`.
     */
-    @objc
+    
     public let type: String?
     
     /* If the content uses a predefined template, this will be set to the name of the template. */
-    @objc
+    
     public let template: String?
     
     /* Contains the template data used to build the content. */
-    @objc
-    public let data: [String: Any]?
+    
+    public let data: TemplateData?
     
     /* The rendered body of the content. */
-    @objc
+    
     public let body: String?
     
-    /**
-        Initializes the struct from a JSON dictionary (expects keys: `type`, `template`, `data`, `body`, and `customData`) 
-    */
-    public init(dictionary: [String: Any]) {
-        type = dictionary["type"] as? String
-        template = dictionary["template"] as? String
-        data = dictionary["data"] as? [String: Any]
-        body = dictionary["body"] as? String
+    public struct TemplateData: Codable {
+        public let imageUrl: String?
+        public let title: String?
+        public let width, height: Int?
+        public let customData: CustomData?
+        
+        public struct CustomData: Codable {
+            public let hash, headline, cta: String?
+        }
     }
 }
+
+//extension ADZPlacementContent {
+//    enum CodingKeys: String, CodingKey {
+//        case type
+//        case template
+//        case body
+//    }
+//}
