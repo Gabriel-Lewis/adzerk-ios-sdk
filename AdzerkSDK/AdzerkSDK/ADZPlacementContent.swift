@@ -42,15 +42,12 @@ public struct ADZPlacementContent : Codable {
         public let customData: CustomData?
         
         public struct CustomData: Codable {
-            public let hash, headline, cta: String?
+            public let hashString: String?
+            public let customPixel: String?
+            enum CodingKeys: String, CodingKey {
+                case hashString = "hash"
+                case customPixel = "customPx"
+            }
         }
     }
 }
-
-//extension ADZPlacementContent {
-//    enum CodingKeys: String, CodingKey {
-//        case type
-//        case template
-//        case body
-//    }
-//}
