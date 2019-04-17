@@ -575,7 +575,7 @@ public typealias ADZUserDBUserResponseCallback = (ADZUser?, Error?) -> ()
             saveUserKey(response)
             return response
         } catch {
-            logger.error("couldn't parse response as JSON")
+            logger.error("couldn't parse response as JSON \(error)")
             return nil
         }
     }
