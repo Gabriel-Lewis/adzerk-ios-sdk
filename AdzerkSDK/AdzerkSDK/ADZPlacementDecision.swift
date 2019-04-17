@@ -13,9 +13,6 @@ import Foundation
     will be represented as one of these.
 */
 public struct ADZPlacementDecision : Codable {
-    /** The name of the div requested */
-    
-    public let divName: String
     
     public let adId: Int?
     public let creativeId: Int?
@@ -48,6 +45,6 @@ public struct ADZPlacementDecision : Codable {
     public let events: [ADZPlacementEvent]?
         
     public var description: String {
-        return "ADZPlacementDecision: divName=\(divName) adId=\(adId ?? 0) creativeId=\(creativeId ?? 0)"
+        return "ADZPlacementDecision: adId=\(adId ?? 0) creativeId=\(creativeId ?? 0)"
     }
 }
